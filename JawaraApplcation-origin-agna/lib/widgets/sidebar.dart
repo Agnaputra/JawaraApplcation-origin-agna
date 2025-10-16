@@ -300,10 +300,10 @@ class SideBar extends StatelessWidget {
                         },
                       ),
                       ListTile(
-                        leading: Icon(Icons.notifications_active_outlined),
-                        title: Text('Broadcast - Daftar'),
+                        leading: const Icon(Icons.notifications_active_outlined),
+                        title: const Text('Broadcast - Daftar'),
                         onTap: () {
-                          onNavigate(const boradcastDaftarPage());
+                        onNavigate(BroadcastDaftarPage());
                         },
                       ),
                       ListTile(
