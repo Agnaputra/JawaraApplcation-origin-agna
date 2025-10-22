@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:jawaraapllication/pages/dashboard_page.dart';
+import 'package:jawaraapllication/main.dart';
 
 //dashboard
 // import 'package:jawaraapllication/pages/datawarga_page.dart';
@@ -57,6 +58,8 @@ import 'package:jawaraapllication/pages/Pengeluaran/pengeluaranTambah.dart';
 
 //pesan warga
 import 'package:jawaraapllication/pages/PesanWarga/infoAspirasi.dart';
+
+//import 'package:jawaraapllication/pages/KegiatandanBroadcast/broadcastTambah.dart';
 
 class SideBar extends StatelessWidget {
   final Function(Widget) onNavigate;
@@ -296,21 +299,21 @@ class SideBar extends StatelessWidget {
                         leading: Icon(Icons.add_circle_outline),
                         title: Text('Kegiatan - Tambah'),
                         onTap: () {
-                          onNavigate(const kegiatanTambahPage());
+                          onNavigate(const KegiatanTambahPage());
                         },
                       ),
                       ListTile(
-                        leading: const Icon(Icons.notifications_active_outlined),
-                        title: const Text('Broadcast - Daftar'),
+                        leading: Icon(Icons.notifications_active_outlined),
+                        title: Text('Broadcast - Daftar'),
                         onTap: () {
-                          onNavigate(BroadcastDaftarPage());
+                          onNavigate(const BroadcastDaftarPage());
                         },
                       ),
                       ListTile(
                         leading: Icon(Icons.add_alert_outlined),
                         title: Text('Broadcast - Tambah'),
                         onTap: () {
-                          onNavigate(const boradcastTambahPage());
+                          onNavigate(const BroadcastTambahPage());
                         },
                       ),
                     ],
@@ -365,7 +368,7 @@ class SideBar extends StatelessWidget {
                         leading: Icon(Icons.add_circle_outline),
                         title: Text('Tambah'),
                         onTap: () {
-                          onNavigate(const Mutasitambah());
+                          onNavigate(const MutasiTambah());
                         },
                       ),
                     ],
@@ -420,14 +423,14 @@ class SideBar extends StatelessWidget {
                         leading: Icon(Icons.device_hub_outlined),
                         title: Text('Daftar Channel'),
                         onTap: () {
-                          onNavigate(const tambahChannelPage());
+                          onNavigate(const daftarChannelPage());
                         },
                       ),
                       ListTile(
                         leading: Icon(Icons.add_link_outlined),
                         title: Text('Tambah Channel'),
                         onTap: () {
-                          onNavigate(const daftarChannelPage());
+                          onNavigate(const tambahChannelPage());
                         },
                       ),
                     ],
@@ -438,17 +441,100 @@ class SideBar extends StatelessWidget {
 
             const Divider(),
 
-            // PROFIL ADMIN
-            ListTile(
-              leading: const CircleAvatar(
-                backgroundColor: Colors.indigo,
-                child: Icon(Icons.person, color: Colors.white),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+              child: PopupMenuButton<int>(
+                offset: const Offset(0, -110), // controls popup position
+                color: Colors.white,
+                elevation: 4,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    enabled: false,
+                    child: Row(
+                      children: [
+                        const CircleAvatar(
+                          radius: 18,
+                          backgroundColor: Colors.indigo,
+                          child: Icon(Icons.person, color: Colors.white),
+                        ),
+                        const SizedBox(width: 10),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              'Admin Jawara',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87,
+                              ),
+                            ),
+                            Text(
+                              'admin1@gmail.com',
+                              style: TextStyle(
+                                color: Colors.black54,
+                                fontSize: 13,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const PopupMenuDivider(),
+                  PopupMenuItem(
+                    value: 1,
+                    child: Row(
+                      children: const [
+                        Icon(Icons.logout_outlined, color: Colors.black54),
+                        SizedBox(width: 8),
+                        Text('Log out'),
+                      ],
+                    ),
+                  ),
+                ],
+                onSelected: (value) {
+                  if (value == 1) {
+                    Navigator.pushReplacement(context, 
+                      MaterialPageRoute(builder: (context) => const MainLayout()),
+                    );
+                  }
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.indigo.shade50,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  child: Row(
+                    children: [
+                      const CircleAvatar(
+                        backgroundColor: Colors.indigo,
+                        child: Icon(Icons.person, color: Colors.white),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              'Admin Jawara',
+                              style: TextStyle(fontWeight: FontWeight.w600),
+                            ),
+                            Text(
+                              'admin1@gmail.com',
+                              style: TextStyle(fontSize: 13, color: Colors.black54),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Icon(Icons.keyboard_arrow_down_rounded, color: Colors.black54),
+                    ],
+                  ),
+                ),
               ),
-              title: const Text('Admin Jawara'),
-              subtitle: const Text('admin1@gmail.com'),
-              trailing: const Icon(Icons.expand_more),
-              onTap: () {},
             ),
+
           ],
         ),
       ),

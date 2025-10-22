@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // --- BAGIAN 1: MODAL FILTER (STATEFUL) ---
 class _KegiatanFilterDialog extends StatefulWidget {
-  _KegiatanFilterDialog({super.key}); 
+  _KegiatanFilterDialog({super.key});
 
   @override
   State<_KegiatanFilterDialog> createState() => _KegiatanFilterDialogState();
@@ -11,8 +11,13 @@ class _KegiatanFilterDialog extends StatefulWidget {
 class _KegiatanFilterDialogState extends State<_KegiatanFilterDialog> {
   String? selectedKategori;
   DateTime? _selectedDate;
-  
-  final List<String> kategoriOptions = ['Komunitas & Sosial', 'Keagamaan', 'Pendidikan', 'Lain-lain'];
+
+  final List<String> kategoriOptions = [
+    'Komunitas & Sosial',
+    'Keagamaan',
+    'Pendidikan',
+    'Lain-lain',
+  ];
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -23,9 +28,11 @@ class _KegiatanFilterDialogState extends State<_KegiatanFilterDialog> {
       builder: (context, child) {
         return Theme(
           data: ThemeData.light().copyWith(
-            primaryColor: const Color(0xFF7166F9), 
+            primaryColor: const Color(0xFF7166F9),
             colorScheme: const ColorScheme.light(primary: Color(0xFF7166F9)),
-            buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.primary),
+            buttonTheme: const ButtonThemeData(
+              textTheme: ButtonTextTheme.primary,
+            ),
           ),
           child: child!,
         );
@@ -46,18 +53,21 @@ class _KegiatanFilterDialogState extends State<_KegiatanFilterDialog> {
 
   @override
   Widget build(BuildContext context) {
-    String dateText = _selectedDate == null 
-        ? '-- / -- / ----' 
+    String dateText = _selectedDate == null
+        ? '-- / -- / ----'
         : '${_selectedDate!.day.toString().padLeft(2, '0')}-${_selectedDate!.month.toString().padLeft(2, '0')}-${_selectedDate!.year}';
-        
+
     return AlertDialog(
       contentPadding: const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 0.0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      
+
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text('Filter Kegiatan', style: TextStyle(fontWeight: FontWeight.bold)),
+          const Text(
+            'Filter Kegiatan',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           IconButton(
             icon: const Icon(Icons.close),
             onPressed: () => Navigator.of(context).pop(),
@@ -71,7 +81,10 @@ class _KegiatanFilterDialogState extends State<_KegiatanFilterDialog> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('Nama Kegiatan', style: TextStyle(fontWeight: FontWeight.w500)),
+              const Text(
+                'Nama Kegiatan',
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
               const SizedBox(height: 8),
               TextFormField(
                 decoration: InputDecoration(
@@ -80,12 +93,18 @@ class _KegiatanFilterDialogState extends State<_KegiatanFilterDialog> {
                     borderRadius: BorderRadius.circular(8),
                     borderSide: const BorderSide(color: Colors.grey),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 12,
+                  ),
                 ),
               ),
               const SizedBox(height: 16),
 
-              const Text('Tanggal Pelaksanaan', style: TextStyle(fontWeight: FontWeight.w500)),
+              const Text(
+                'Tanggal Pelaksanaan',
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
               const SizedBox(height: 8),
               TextFormField(
                 readOnly: true,
@@ -97,7 +116,10 @@ class _KegiatanFilterDialogState extends State<_KegiatanFilterDialog> {
                     borderRadius: BorderRadius.circular(8),
                     borderSide: const BorderSide(color: Colors.grey),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 12,
+                  ),
                   suffixIcon: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -106,7 +128,11 @@ class _KegiatanFilterDialogState extends State<_KegiatanFilterDialog> {
                         onPressed: _resetDate,
                       ),
                       const SizedBox(width: 4),
-                      Container(color: Colors.grey.shade300, width: 1, height: 24),
+                      Container(
+                        color: Colors.grey.shade300,
+                        width: 1,
+                        height: 24,
+                      ),
                       IconButton(
                         icon: const Icon(Icons.calendar_month, size: 20),
                         onPressed: () => _selectDate(context),
@@ -118,7 +144,10 @@ class _KegiatanFilterDialogState extends State<_KegiatanFilterDialog> {
               ),
               const SizedBox(height: 16),
 
-              const Text('Kategori', style: TextStyle(fontWeight: FontWeight.w500)),
+              const Text(
+                'Kategori',
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
               const SizedBox(height: 8),
               DropdownButtonFormField<String>(
                 value: selectedKategori,
@@ -127,7 +156,10 @@ class _KegiatanFilterDialogState extends State<_KegiatanFilterDialog> {
                     borderRadius: BorderRadius.circular(8),
                     borderSide: const BorderSide(color: Colors.grey),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 12,
+                  ),
                   isDense: true,
                 ),
                 hint: const Text('-- Pilih Kategori --'),
@@ -151,16 +183,21 @@ class _KegiatanFilterDialogState extends State<_KegiatanFilterDialog> {
       actionsPadding: const EdgeInsets.all(16.0),
       actions: [
         OutlinedButton(
-          onPressed: () => Navigator.of(context).pop(), 
-          child: const Text('Reset Filter', style: TextStyle(color: Colors.black54)),
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text(
+            'Reset Filter',
+            style: TextStyle(color: Colors.black54),
+          ),
         ),
         ElevatedButton(
-          onPressed: () => Navigator.of(context).pop(), 
+          onPressed: () => Navigator.of(context).pop(),
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFF7166F9),
             foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
           ),
           child: const Text('Terapkan'),
         ),
@@ -175,19 +212,44 @@ class _KegiatanDaftarTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const List<String> headers = ['NO', 'NAMA KEGIATAN', 'KATEGORI', 'PENANGGUNG JAWAB', 'TANGGAL PELAKSANAAN', 'AKSI'];
-    
+    const List<String> headers = [
+      'NO',
+      'NAMA KEGIATAN',
+      'KATEGORI',
+      'PENANGGUNG JAWAB',
+      'TANGGAL PELAKSANAAN',
+      'AKSI',
+    ];
+
     // Data Dummy
     final List<List<String>> dataRows = [
-      ['1', 'Gotong Royong Desa', 'Komunitas & Sosial', 'Pak Budi', '12 Oktober 2025'],
+      [
+        '1',
+        'Gotong Royong Desa',
+        'Komunitas & Sosial',
+        'Pak Budi',
+        '12 Oktober 2025',
+      ],
       ['2', 'Bakti Sosial Masjid', 'Keagamaan', 'Bu Rina', '20 Oktober 2025'],
-      ['3', 'Pelatihan Flutter Dasar', 'Pendidikan', 'Agna Putra', '25 Oktober 2025'],
-      ['4', 'Donor Darah Bersama', 'Komunitas & Sosial', 'Dony', '28 Oktober 2025'],
+      [
+        '3',
+        'Pelatihan Flutter Dasar',
+        'Pendidikan',
+        'Agna Putra',
+        '25 Oktober 2025',
+      ],
+      [
+        '4',
+        'Donor Darah Bersama',
+        'Komunitas & Sosial',
+        'Dony',
+        '28 Oktober 2025',
+      ],
       ['5', 'Lomba Cerdas Cermat', 'Pendidikan', 'Bu Wati', '2 November 2025'],
     ];
 
     return Card(
-      elevation: 8, 
+      elevation: 8,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -202,12 +264,21 @@ class _KegiatanDaftarTable extends StatelessWidget {
               child: Row(
                 children: List.generate(headers.length, (index) {
                   return Expanded(
-                    flex: index == 0 ? 1 : (index == headers.length - 1 ? 1 : 3),
+                    flex: index == 0
+                        ? 1
+                        : (index == headers.length - 1 ? 1 : 3),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0,
+                        vertical: 12.0,
+                      ),
                       child: Text(
                         headers[index],
-                        style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12, color: Color(0xFF707070)),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 12,
+                          color: Color(0xFF707070),
+                        ),
                       ),
                     ),
                   );
@@ -215,7 +286,7 @@ class _KegiatanDaftarTable extends StatelessWidget {
               ),
             ),
           ),
-          
+
           // Baris Data
           ...dataRows.map((row) {
             return IntrinsicHeight(
@@ -226,28 +297,44 @@ class _KegiatanDaftarTable extends StatelessWidget {
                     return Expanded(
                       flex: colIndex == 0 ? 1 : 3,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
-                        child: Text(row[colIndex], style: const TextStyle(fontSize: 14)),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0,
+                          vertical: 12.0,
+                        ),
+                        child: Text(
+                          row[colIndex],
+                          style: const TextStyle(fontSize: 14),
+                        ),
                       ),
                     );
                   }),
-                  
+
                   // Kolom Aksi (Menu Pop-up)
                   Expanded(
                     flex: 1,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0,
+                        vertical: 8.0,
+                      ),
                       child: PopupMenuButton<String>(
-                        icon: const Icon(Icons.more_horiz, color: Color(0xFF9097A6)),
+                        icon: const Icon(
+                          Icons.more_horiz,
+                          color: Color(0xFF9097A6),
+                        ),
                         onSelected: (String result) {
                           // Menampilkan feedback ke pengguna
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text('$result: ${row[1]}'), // Menampilkan aksi dan nama kegiatan
-                              backgroundColor: result == 'Hapus' ? Colors.red : const Color(0xFF7166F9),
+                              content: Text(
+                                '$result: ${row[1]}',
+                              ), // Menampilkan aksi dan nama kegiatan
+                              backgroundColor: result == 'Hapus'
+                                  ? Colors.red
+                                  : const Color(0xFF7166F9),
                             ),
                           );
-                          
+
                           // TODO: Implementasi logika spesifik di sini:
                           if (result == 'Lihat Detail') {
                             // Navigasi ke halaman detail
@@ -257,20 +344,24 @@ class _KegiatanDaftarTable extends StatelessWidget {
                             // Tampilkan dialog konfirmasi hapus
                           }
                         },
-                        itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-                          const PopupMenuItem<String>(
-                            value: 'Lihat Detail',
-                            child: Text('Lihat Detail'),
-                          ),
-                          const PopupMenuItem<String>(
-                            value: 'Edit',
-                            child: Text('Edit'),
-                          ),
-                          const PopupMenuItem<String>(
-                            value: 'Hapus',
-                            child: Text('Hapus', style: TextStyle(color: Colors.red)),
-                          ),
-                        ],
+                        itemBuilder: (BuildContext context) =>
+                            <PopupMenuEntry<String>>[
+                              const PopupMenuItem<String>(
+                                value: 'Lihat Detail',
+                                child: Text('Lihat Detail'),
+                              ),
+                              const PopupMenuItem<String>(
+                                value: 'Edit',
+                                child: Text('Edit'),
+                              ),
+                              const PopupMenuItem<String>(
+                                value: 'Hapus',
+                                child: Text(
+                                  'Hapus',
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ),
+                            ],
                       ),
                     ),
                   ),
@@ -289,12 +380,21 @@ class _KegiatanDaftarTable extends StatelessWidget {
                 const Icon(Icons.arrow_left, color: Color(0xFFD6D3D6)),
                 const SizedBox(width: 8),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFF7166F9),
                     borderRadius: BorderRadius.circular(6),
                   ),
-                  child: const Text('1', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  child: const Text(
+                    '1',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
                 const SizedBox(width: 8),
                 const Icon(Icons.arrow_right, color: Color(0xFFD6D3D6)),
@@ -332,7 +432,10 @@ class kegiatanDaftarPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [const Color(0xFF7166F9).withOpacity(0.9), const Color(0xFFC4B8FD)],
+                colors: [
+                  const Color(0xFF7166F9).withOpacity(0.9),
+                  const Color(0xFFC4B8FD),
+                ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -344,13 +447,17 @@ class kegiatanDaftarPage extends StatelessWidget {
                 SizedBox(width: 15),
                 Text(
                   'Daftar Kegiatan',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),
           ),
           const SizedBox(height: 30),
-          
+
           // Row Filter
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -363,7 +470,11 @@ class kegiatanDaftarPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   padding: const EdgeInsets.all(8),
-                  child: const Icon(Icons.filter_list, color: Colors.white, size: 24),
+                  child: const Icon(
+                    Icons.filter_alt,
+                    color: Colors.white,
+                    size: 24,
+                  ),
                 ),
               ),
               const SizedBox(width: 8),

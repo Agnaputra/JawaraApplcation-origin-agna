@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 import 'pages/dashboard_page.dart';
 import 'widgets/sidebar.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting(
+    'id_ID',
+    null,
+  ); // Contoh untuk bahasa Indonesia
+  runApp(const MyApp());
+}
+
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -49,6 +59,9 @@ class _MainLayoutState extends State<MainLayout> {
         duration: const Duration(milliseconds: 300),
         child: _currentPage,
       ),
+      // Floating action button removed for penerimaanWargaPage: navigation
+      // to the add page is done via the 'Tambah' button in the page itself.
+      floatingActionButton: null,
     );
   }
 }
